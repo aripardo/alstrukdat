@@ -1,0 +1,12 @@
+Buat setup awalnya
+1. cd ke folder tubes
+2. git init
+3. git pull https://github.com/afiffahreza/alstrukdat master
+
+Sebelum mau edit/nambah file
+git pull https://github.com/afiffahreza/alstrukdat master
+
+Kalo udah selesai edit/nambah file
+1. git add .
+2. git commit -m "Keterangan"
+3. git push git pull https://github.com/afiffahreza/alstrukdat master
