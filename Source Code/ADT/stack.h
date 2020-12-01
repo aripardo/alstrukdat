@@ -1,25 +1,14 @@
+#ifndef __STACK_H__
+#define __STACK_H__
 
-#ifndef stack_H
-#define stack_H
-#include <stdio.h>
+#include "komponen.h"
+#include "boolean.h"
 
-/* MODUL STACK
-Deklarasi stack yang diimplementasi dengan tabel kontigu alokasi statik
-dan ukuran sama
-TOP adalah alamat elemen puncak*/
-
-#define false 0
-#define true 1
-#define Nil 0
-#define MaxEl 10
-
-typedef int bool;
-typedef char infotype;
 typedef int address;
 
 typedef struct
 {
-    infotype T[MaxEl];
+    Komponen Build[8];
     address TOP;
 } Stack;
 
@@ -36,19 +25,21 @@ void CreateEmpty(Stack *S);
 /* Ciri stack kosong : TOP bernilai Nil */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-bool IsEmpty(Stack S);
+boolean IsEmpty(Stack S);
 /* Mengirim true jika Stack kosong*/
 /* Ciri stack kosong : TOP bernilai Nil */
-bool IsFull(Stack S);
+boolean IsFull(Stack S);
 /* Mengirim true jika stack S penuh */
 /* Ciri stack penuh : TOP bernilai MaxEl */
+boolean IsSame(Stack S1, Stack S2);
+/* Mengirim true jika stack S1 dan S2 sama */
 
 /* ********** Operator Dasar Stack ********* */
-void Push(Stack *S, infotype X);
+void Push(Stack *S, Komponen X);
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, S tidak penuh */
 /* F.S. X menjadi element TOP yang baru, TOP bertambah 1 */
-void Pop(Stack *S, infotype *X);
+void Pop(Stack *S, Komponen *X);
 /* Menghapus X dari Stack S. */
 /* I.S. S tidak kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
