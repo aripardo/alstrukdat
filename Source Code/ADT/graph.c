@@ -63,11 +63,11 @@ void insertEdge(Graph *G, int prec, int succ){
     boolean firstFound = false, secondFound = false;
     firstSuccNode = firstNode->Trail;
     while (firstSuccNode!=NULL && firstFound == false){
-        if (firstSuccNode->Succ == succ) firstFound = true;
+        if (firstSuccNode->Succ->NoPelanggan == succ) firstFound = true;
         firstSuccNode = firstSuccNode->Next;
     }
     while (secondSuccNode!=NULL && secondFound == false){
-        if (secondSuccNode->Succ == prec) secondFound = true;
+        if (secondSuccNode->Succ->NoPelanggan == prec) secondFound = true;
         secondSuccNode = secondSuccNode->Next;
     }
 
@@ -84,7 +84,7 @@ void MatrixToGraph (Matriks M, Graph *G){
     for (int i = 1; i <= M.Baris; i++){
         for (int j = 1; j <= M.Kolom; j++){
             if (Elmt(M, i, j) == 1) {
-                insertEdge(*G,i,j);
+                insertEdge(G,i,j);
             }
         }
     }
