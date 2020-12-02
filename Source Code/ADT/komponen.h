@@ -7,6 +7,23 @@ typedef struct {
     int Kategori;
 } Komponen;
 
+typedef struct {
+    Komponen *A;
+    int Neff;
+    int Capacity;
+} ListKomponen;
+
+/*
+#define Neff(T) (T).Neff
+#define Capacity(T) (T).Capacity
+#define KodeKomponen(T) (T).KodeKomponen
+#define NodeKomponen(T, i) (T).KodeKomponen[(i)]
+#define Harga(T) (T).Harga
+#define Harga(T, i) (T).Harga[(i)]
+#define Kategori(T) (T).Kategori
+#define Kategori(T, i) (T).Kategori[(i)]
+*/
+
 /* 
 KATEGORI
 Motherboard = 1
@@ -18,7 +35,5 @@ GPU = 6
 Storage = 7
 PSU = 8
 */
-
-void namaKomponen (int ID, char* Nama[30]);
 
 #endif
