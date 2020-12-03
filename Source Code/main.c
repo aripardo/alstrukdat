@@ -72,7 +72,29 @@ void removecomponent(){
 
 
 void shop(){
-
+    int belikomp,kuantitas,total;
+    //Komponen ListKomp;
+    //char IDKomponen;
+    printf("Komponen yang tersedia:\n");
+    for (int i=0;i<24;i++){
+        printf("%d. %s - ""$""%d\n",(i+1),IDKomponen[i],ListKomp[i]->Harga);
+    }
+    printf("Komponen yang ingin dibeli: ");
+    scanf("%d",(&belikomp));
+    printf("Masukkan jumlah yang ingin dibeli: ");
+    scanf("%d",(&kuantitas));
+    for (int i=0;i<24;i++){
+        if (i==belikomp){
+            total = ((ListKomp[i-1]->Harga)*(kuantitas));
+            if (total>Uang){
+                printf("Uang tidak cukup!");
+            } else{
+                Uang=Uang-total;
+                 //addKomponen(*T,*[i-1],kuantitas);
+                printf("Komponen berhasil dibeli!");
+            }
+        }
+    }
 }
 
 void deliver(){

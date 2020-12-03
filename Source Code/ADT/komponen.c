@@ -38,8 +38,8 @@ char IDKomponen[24][35] = {
     "Corsair AX1600i",
     "Seasonic Prime Platinum 1200PD",
 };
-
-Komponen ListKomponen[24] = {
+//[24][3]=S
+Komponen ListKomp[24][3]={
     // {KODE, HARGA, KATEGORI}
     {1,250,1},
     {2,100,1},
@@ -70,4 +70,3 @@ Komponen ListKomponen[24] = {
 void namaKomponen (int ID, char* Nama[]){
     (*Nama) = IDKomponen[ID];
 }
-

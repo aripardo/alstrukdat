@@ -11,20 +11,21 @@ typedef struct {
     Komponen *A;
     int Neff;
     int Capacity;
-} ListKomponens;
+} ListKomponen;
 
 /*
 #define Neff(T) (T).Neff
 #define Capacity(T) (T).Capacity
 #define KodeKomponen(T) (T).KodeKomponen
-#define NodeKomponen(T, i) (T).KodeKomponen[(i)]
+#define KodeKomponen(T, i) (T).KodeKomponen[(i)]
 #define Harga(T) (T).Harga
 #define Harga(T, i) (T).Harga[(i)]
 #define Kategori(T) (T).Kategori
 #define Kategori(T, i) (T).Kategori[(i)]
 */
+//#define ListKomp(T,i) (T).A[i]
 
-/*
+/* 
 KATEGORI
 Motherboard = 1
 CPU = 2
