@@ -44,8 +44,8 @@ void GrowTab(ArrayDinInventory *T, int num);
 void ShrinkTab(ArrayDinInventory *T, int num);
 
 // TAMBAH KURANG ELEMEN
-void addKomponen (ArrayDinInventory *T, char *namakomponen, int kuantitas);
-void removeSatuKomponen (ArrayDinInventory *T, char *namakomponen);
+void addKomponen (ArrayDinInventory *T, int *KodeKomponen, int kuantitas);
+void removeSatuKomponen (ArrayDinInventory *T, int *KodeKomponen);
 
 
 #endif

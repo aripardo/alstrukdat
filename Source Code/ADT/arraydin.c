@@ -85,7 +85,7 @@ void ShrinkTab(ArrayDinInventory *T, int num){
 
 
 // TAMBAH KURANG ELEMEN
-void addKomponen (ArrayDinInventory *T, char *namakomponen, int kuantitas){
+void addKomponen (ArrayDinInventory *T, int *KodeKomponen, int kuantitas){
     boolean found = false;
     int i = 0;
     while(!found && i<= GetLastIdx(*T)){
@@ -104,7 +104,7 @@ void addKomponen (ArrayDinInventory *T, char *namakomponen, int kuantitas){
     }
 }    
 }
-void removeKomponen (ArrayDinInventory *T, char *namakomponen){
+void removeKomponen (ArrayDinInventory *T, int *KodeKomponen){
     boolean found = false;
     int i = 0;
     while(!found && i<= GetLastIdx(*T)){
