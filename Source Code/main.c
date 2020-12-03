@@ -44,7 +44,10 @@ void move(){
 }
 
 void status(){
-
+    printf("Uang tersisa: $%d\n", Uang);
+    printf("Build yang sedang dikerjakan: pesanan %d untuk pelanggan %d.\n", Head(Order), Order.Pemesan->NoPelanggan );
+    printf("Lokasi: pemain sedang berada pada %d\n", CurrentLocation);
+    printf("Inventory anda: %d", Inventory.TabKomponen);
 }
 
 void checkorder(){
@@ -73,7 +76,11 @@ void shop(){
 }
 
 void deliver(){
-
+    Point P = Order.Pemesan[Head(Order)].Lokasi;
+    if(CurrentLocation == P){
+        Head(Order) = Head(Order)+1;
+        Uang = Uang + Order.Pemesan->Invoice;
+    }
 }
 
 void end_day(){

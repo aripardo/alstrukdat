@@ -29,7 +29,21 @@ int GetLastIdx(ArrayDinInventory T){
     return T.Neff-1;
 }
 int SearchElmt(ArrayDinInventory T, Komponen K){
-
+    int i = 0;
+    boolean found = false;
+    while(!found && i<= GetLastIdx(T)){
+        if (T.TabKomponen[i].KodeKomponen == K.KodeKomponen){
+            found = true;
+        }
+        i++;
+    }
+    i = i-1;
+    if (found){
+        return i;
+    }
+    else{
+        return (-999);
+    }
 }
 
 // PREDIKAT
@@ -72,8 +86,43 @@ void ShrinkTab(ArrayDinInventory *T, int num){
 
 // TAMBAH KURANG ELEMEN
 void addKomponen (ArrayDinInventory *T, char *namakomponen, int kuantitas){
-    
+    boolean found = false;
+    int i = 0;
+    while(!found && i<= GetLastIdx(*T)){
+        if (T->TabKomponen[i].KodeKomponen == *KodeKomponen){
+            found = true;
+        }
+    }
+    if (found){
+        *T->Kuantitas = *T->Kuantitas + kuantitas;
+    }
+    else{
+        i = GetLastIdx(*T) + 1;
+        ArrayDinInventory P = *T;
+        P.TabKomponen[i].KodeKomponen = *KodeKomponen;
+        T->Kuantitas[i] = T->Kuantitas[i] + 1;        
+    }
+}    
 }
 void removeKomponen (ArrayDinInventory *T, char *namakomponen){
-
+    boolean found = false;
+    int i = 0;
+    while(!found && i<= GetLastIdx(*T)){
+        if (T->TabKomponen[i].KodeKomponen == *KodeKomponen){
+            found = true;
+        }
+        i++;
+    }
+    if (found){
+        if(*T->Kuantitas >= 2){
+            T->Kuantitas = T->Kuantitas - 1;
+        }
+        else {
+            T->Kuantitas = NULL;
+            Dealokasi(T); 
+            while (i < GetLastIdx(*T)){
+                (*T).TabKomponen[i] = (*T).TabKomponen[i-1];
+            }
+        }
+    }  
 }

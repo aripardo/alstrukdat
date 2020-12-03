@@ -1,2 +1,0 @@
-# alstrukdat
-Tubes alstrukdat
