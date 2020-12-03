@@ -93,6 +93,9 @@ void shop(){
                  //addKomponen(*T,*[i-1],kuantitas);
                 printf("Komponen berhasil dibeli!");
             }
+        }else{
+            printf("Tidak ada komponen");
+            break;
         }
     }
 }
