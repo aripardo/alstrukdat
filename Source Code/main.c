@@ -52,11 +52,11 @@ void checkorder(){
 }
 
 void startbuild(){
-
+	
 }
 
 void finishbuild(){
-
+	
 }
 
 void addcomponent(){
@@ -64,7 +64,7 @@ void addcomponent(){
 }
 
 void removecomponent(){
-    
+   
 }
 
 

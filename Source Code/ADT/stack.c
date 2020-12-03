@@ -10,7 +10,7 @@
 /* ********* Prototype ********* */
 
 /* *** Konstruktor/Kreator *** */
-void CreateEmpty(Stack *S){
+void CreateEmptyStack(Stack *S){
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
 /* Ciri stack kosong : TOP bernilai Nil */
@@ -18,15 +18,15 @@ void CreateEmpty(Stack *S){
 }
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-boolean IsEmpty(Stack S){
+boolean IsStackEmpty(Stack S){
 /* Mengirim true jika Stack kosong*/
 /* Ciri stack kosong : TOP bernilai Nil */
-    return (S.TOP==-999);
+    return (S.TOP == -999);
 }
-boolean IsFull(Stack S){
+boolean IsStackFull(Stack S){
 /* Mengirim true jika stack S penuh */
 /* Ciri stack penuh : TOP bernilai MaxEl */
-    return (S.TOP==8);
+    return (S.TOP == 8);
 }
 
 /* ********** Operator Dasar Stack ********* */
@@ -34,7 +34,7 @@ void Push(Stack *S, Komponen X){
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, S tidak penuh */
 /* F.S. X menjadi element TOP yang baru, TOP bertambah 1 */
-    if (IsEmpty((*S))) {
+    if (IsStackEmpty((*S))) {
         S->TOP = 1;
         S->Build[S->TOP-1] = X;
     }

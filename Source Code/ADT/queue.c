@@ -9,24 +9,24 @@
 
 /* *** Predikat Pemeriksaan Kondisi Queue *** */
 
-boolean IsEmpty (Queue Q) { 
+boolean IsQueueEmpty (Queue Q) {
 /* Mengirim true jika Q kosong: ... */
 	return ((Head(Q)==Nil) && (Tail(Q)==Nil));
 }
 
-boolean IsFull (Queue Q) { 
+boolean IsQueueFull (Queue Q) {
 /* Mengirim true jika tabel ... */
 	return ((Head(Q)==0) && (Tail(Q)==MaxEl(Q)-1));
 }
 
-int NBElmt(Queue Q) { 
+int NBElmt(Queue Q) {
 /* Mengirimkan banyaknya elemen queue. ... */
 	return (Tail(Q)-Head(Q)+1);
 }
 
 /* *** Konstruktor *** */
 
-void CreateEmpty(Queue *Q, int Max) {
+void CreateEmptyQueue(Queue *Q, int Max) {
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max */
@@ -39,7 +39,7 @@ void CreateEmpty(Queue *Q, int Max) {
 		MaxEl(*Q) = Max;
 		Head(*Q) = Nil;
 		Tail(*Q) = Nil;
-	} 
+	}
 	else /* alokasi gagal */ {
 		MaxEl(*Q) = 0;
 	}
@@ -60,9 +60,9 @@ void Enqueue(Queue *Q, infoPemesan X) {
 	/* Kamus Lokal */
 	address i, j;
 	/* Algoritma */
-	if (IsEmpty(*Q)) {
+	if (IsQueueEmpty(*Q)) {
 		Head(*Q)=0;
-	} 
+	}
 	else /* Q tidak kosong */ {
 		if (Tail(*Q)==MaxEl(*Q)-1) { /* Geser elemen smp Head(Q)=0 */
 		i = Head(*Q); j = 0;
@@ -88,7 +88,7 @@ Q mungkin kosong */
 	if (Head(*Q)==Tail(*Q)) { /* Set mjd queue kosong */
 		Head(*Q)=Nil;
 		Tail(*Q)=Nil;
-	} 
+	}
 	else {
 		Head(*Q)++;
 	}

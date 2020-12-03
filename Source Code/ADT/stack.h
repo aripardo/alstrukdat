@@ -12,6 +12,9 @@ typedef struct
     address TOP;
 } Stack;
 
+#define Top(S) (S).TOP
+#define InfoTop(S) (S).Build[(S).TOP]
+
 /* Definisi stack S kosong : S.TOP = Nil */
 /* S.TOP = jumlah element stack */
 /* S.T[S.TOP-1] = element paling atas */
@@ -19,19 +22,19 @@ typedef struct
 /* ********* Prototype ********* */
 
 /* *** Konstruktor/Kreator *** */
-void CreateEmpty(Stack *S);
+void CreateEmptyStack(Stack *S);
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
 /* Ciri stack kosong : TOP bernilai Nil */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-boolean IsEmpty(Stack S);
+boolean IsStackEmpty(Stack S);
 /* Mengirim true jika Stack kosong*/
 /* Ciri stack kosong : TOP bernilai Nil */
-boolean IsFull(Stack S);
+boolean IsStackFull(Stack S);
 /* Mengirim true jika stack S penuh */
 /* Ciri stack penuh : TOP bernilai MaxEl */
-boolean IsSame(Stack S1, Stack S2);
+boolean IsStackSame(Stack S1, Stack S2);
 /* Mengirim true jika stack S1 dan S2 sama */
 
 /* ********** Operator Dasar Stack ********* */

@@ -70,3 +70,4 @@ Komponen ListKomponen[24] = {
 void namaKomponen (int ID, char* Nama[]){
     (*Nama) = IDKomponen[ID];
 }
+

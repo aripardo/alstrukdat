@@ -33,12 +33,12 @@ typedef struct {
 
 
 //PREDIKAT
-boolean IsEmpty (Queue Q);  
-boolean IsFull (Queue Q); 
-int NBElmt (Queue Q); 
+boolean IsQueueEmpty (Queue Q);
+boolean IsQueueFull (Queue Q);
+int NBElmt (Queue Q);
 
 // KONSTRUKTOR
-void CreateEmpty (Queue *Q,int Max);
+void CreateEmptyQueue (Queue *Q,int Max);
 void Dealokasi (Queue *Q);
 
 // TAMBAH KURANG ELEMEN
