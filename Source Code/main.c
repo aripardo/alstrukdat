@@ -51,25 +51,75 @@ void status(){
 }
 
 void checkorder(){
-
+	
 }
 
 void startbuild(){
-	
+	printf("Kamu telah memulai pesanan %d untuk pelanggan %d", Head(Order), Order.Pemesan->NoPelanggan);
+	CreateEmptyStack(&CurrentBuild);
 }
 
 void finishbuild(){
-	
+	/* if { *masi blm tau syaratnya*
+		printf("Pesanan %d telah selesai. Silahkan antar ke pelanggan %d!", Head(Order), Order.Pemesan->NoPelanggan);
+	}
+	else {
+		printf("Komponen yang dipasangkan belum sesuai dengan pesanan, build belum dapat diselesaikan.");
+	} */
 }
 
 void addcomponent(){
-    
+	int Nomor;
+    printf("Komponen yang telah terpasang: \n");
+	if (IsStackEmpty(CurrentBuild)) {
+		printf("Tidak ada komponen yang terpasang. \n");
+	}
+	else {
+		for (int x = 1; x < Top(CurrentBuild) ; x++) {
+			printf("%d. %s \n", x, InfoTop(CurrentBuild));
+		}
+	}
+	
+	printf("Komponen yang tersedia: \n");
+	if (IsEmpty(Inventory)) {
+		printf("Inventory anda kosong.");
+	}
+	else {
+		for (int y = 1; y < (Inventory).Neff; y++) {
+			printf("%d. %s \n", y, Inventory.NamaKomponen[(y)]);
+		}
+		
+		printf("Komponen yang ingin dipasang: ");
+		scanf("%d", Nomor);
+		if (IsIdxEff(Inventory, Nomor)) {
+			Push(&CurrentBuild, Inventory.NamaKomponen[(Nomor)]);
+			printf("Komponen berhasil dipasang!");
+		}
+		else {
+			printf("Tidak ada komponen tersebut dalam inventory anda.");
+		}
+	}
 }
 
 void removecomponent(){
-   
+	char *Komp;
+	if (IsStackEmpty(CurrentBuild)) {
+		printf("Tidak ada komponen yang terpasang.");
+	}
+	else {
+		Komp = InfoTop(CurrentBuild);
+		Pop(&S, &Komp);
+		printf("Komponen %s berhasil dicopot!", Komp);
+		/* for (int i = 1; i < Inventory.Neff; i++) {
+			if (Inventory.NamaKomponen[(i)] == Komp) {
+				
+			}
+			else {
+				
+			}
+		} */
+	}
 }
-
 
 void shop(){
     int belikomp,kuantitas,total;
