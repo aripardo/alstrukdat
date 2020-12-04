@@ -3,11 +3,14 @@
 
 #include "graph.h"
 
+void CreateEmptyGraph(Graph *G){
+    (*G).First = NULL;
+}
+
 adrNode AlokasiNode (int NP){
     adrNode P = (adrNode) malloc (sizeof(GraphNode));
     if (P!=NULL){
-        P->NoPelanggan = NP;
-        P->NPred = 0;
+        P->NoLokasi = NP;
         P->Trail = NULL;
         P->Next = NULL;
     }
@@ -46,15 +49,43 @@ void insertNode(Graph *G, int X, adrNode *Pn){
     }
 }
 void insertEdge(Graph *G, int prec, int succ){
+
+    adrNode P = G->First, precNode = NULL, succNode = NULL;
+    boolean found1 = false, found2 = false;
+    while (!(found1&&found2) && P!=NULL){
+        if (P->NoLokasi == prec){
+            precNode = P;
+            found1 = true;
+        }
+        else if (P->NoLokasi == succ){
+            succNode = P;
+            found1 = true;
+        }
+        P = P->Next;
+    }
+    
+
+    adrSuccNode Prec = precNode->Trail, trailNode = AlokasiSuccNode(succNode);
+    if (Prec==NULL){
+        precNode->Trail = trailNode;
+    }
+    else {
+        while (Prec->Next!=NULL){
+            Prec = Prec->Next;
+        }
+        Prec->Next = trailNode;        
+    }
+
+    /*
     adrNode P, firstNode = NULL, secondNode = NULL;
     adrSuccNode firstSuccNode, secondSuccNode;
 
     P = G->First;
     while (P!=NULL){
-        if (P->NoPelanggan == prec){
+        if (P->NoLokasi == prec){
             firstNode = P;
         }
-        if (P->NoPelanggan == succ){
+        if (P->NoLokasi == succ){
             secondNode = P;
         }
         P = P->Next;
@@ -63,11 +94,13 @@ void insertEdge(Graph *G, int prec, int succ){
     boolean firstFound = false, secondFound = false;
     firstSuccNode = firstNode->Trail;
     while (firstSuccNode!=NULL && firstFound == false){
-        if (firstSuccNode->Succ->NoPelanggan == succ) firstFound = true;
+        if (firstSuccNode->Succ->NoLokasi == succ) firstFound = true;
         firstSuccNode = firstSuccNode->Next;
     }
+    
+    secondSuccNode = secondNode->Trail;
     while (secondSuccNode!=NULL && secondFound == false){
-        if (secondSuccNode->Succ->NoPelanggan == prec) secondFound = true;
+        if (secondSuccNode->Succ->NoLokasi == prec) secondFound = true;
         secondSuccNode = secondSuccNode->Next;
     }
 
@@ -78,12 +111,14 @@ void insertEdge(Graph *G, int prec, int succ){
         secondSuccNode = first;
         secondSuccNode->Next = NULL;
     }
+    */
 }
 
 void MatrixToGraph (Matriks M, Graph *G){
-    for (int i = 1; i <= M.Baris; i++){
-        for (int j = 1; j <= M.Kolom; j++){
+    for (int i = 0; i < M.Baris; i++){
+        for (int j = 0; j < M.Kolom; j++){
             if (Elmt(M, i, j) == 1) {
+                //printf("wih masuk\n");
                 insertEdge(G,i,j);
             }
         }

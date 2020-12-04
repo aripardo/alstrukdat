@@ -4,10 +4,12 @@
 #include "boolean.h"
 
 #define MARK '.'
+#define ENTER '\n'
 /* State Mesin */
 extern char CC;
 extern boolean EOP;
 
+void STARTFILE();
 void START();
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
@@ -16,6 +18,7 @@ void START();
           Jika CC != MARK maka EOP akan padam (false)
           Jika CC = MARK maka EOP akan menyala (true) */
 
+void ADVFILE();
 void ADV();
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela = CC, CC != MARK

@@ -16,17 +16,20 @@ typedef struct {
 extern boolean EndKata;
 extern Kata CKata;
 
+void IgnoreBlankFILE();
 void IgnoreBlank();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang
-   F.S. : CC ÅÇ BLANK atau CC = MARK */
+   F.S. : CC ÔøΩÔøΩ BLANK atau CC = MARK */
 
+void STARTKATAFILE();
 void STARTKATA();
 /* I.S. : CC sembarang
    F.S. : EndKata = true, dan CC = MARK;
           atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir kata */
 
+void ADVKATAFILE();
 void ADVKATA();
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
    F.S. : CKata adalah kata terakhir yang sudah diakuisisi,
@@ -34,6 +37,7 @@ void ADVKATA();
           Jika CC = MARK, EndKata = true.
    Proses : Akuisisi kata menggunakan procedure SalinKata */
 
+void SalinKataFILE();
 void SalinKata();
 /* Mengakuisisi kata, menyimpan dalam CKata
    I.S. : CC adalah karakter pertama dari kata
@@ -41,5 +45,7 @@ void SalinKata();
           CC = BLANK atau CC = MARK;
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
+boolean isKataSama(char *kata1, char *kata2, int len);
 
 #endif

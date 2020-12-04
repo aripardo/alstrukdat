@@ -20,4 +20,18 @@ typedef struct {
     int Kolom;
 } Matriks;
 
+void BuatMatriks(int Baris, int Kolom, Matriks *M);
+
+indeks BarisPertama (Matriks M);
+
+indeks KolomPertama (Matriks M);
+
+indeks BarisTerakhir(Matriks M);
+
+indeks KolomTerakhir(Matriks M);
+
+void IsiMatriks(Matriks *M);
+
+void PrintMatriks(Matriks M);
+
 #endif

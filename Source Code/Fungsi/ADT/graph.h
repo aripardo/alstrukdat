@@ -7,8 +7,7 @@
 typedef struct tGraphNode *adrNode;
 typedef struct tGraphSuccNode *adrSuccNode;
 typedef struct tGraphNode {
-    int NoPelanggan;
-    int NPred;
+    int NoLokasi;
     adrSuccNode Trail;
     adrNode Next;
 } GraphNode;
@@ -19,6 +18,8 @@ typedef struct tGraphSuccNode {
 typedef struct {
     adrNode First;
 } Graph;
+
+void CreateEmptyGraph(Graph *G);
 
 adrNode AlokasiNode (int NP);
 void DealokasiNode (adrNode P);

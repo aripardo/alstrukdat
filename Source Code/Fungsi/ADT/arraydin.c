@@ -7,7 +7,7 @@
 void MakeEmpty(ArrayDinInventory *T, int maxel){
     T->Neff = 0;
     T->MaxEl = maxel;
-    T->TabKomponen = (int *) malloc(maxel * sizeof(int));
+    T->TabKomponen = (Komponen *) malloc(maxel * sizeof(Komponen));
 }
 void Dealokasi(ArrayDinInventory *T){
     T->Neff = 0;
@@ -103,7 +103,7 @@ void addKomponen (ArrayDinInventory *T, int *KodeKomponen, int kuantitas){
         T->Kuantitas[i] = T->Kuantitas[i] + 1;        
     }
 }    
-}
+
 void removeKomponen (ArrayDinInventory *T, int *KodeKomponen){
     boolean found = false;
     int i = 0;

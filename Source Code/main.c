@@ -2,174 +2,224 @@
 #include <stdlib.h>
 
 // Library ADT
-#include "ADT/arraydin.h"
-#include "ADT/boolean.h"
-#include "ADT/point.h"
-#include "ADT/queue.h"
-#include "ADT/stack.h"
-/*
-#include "ADT/graph.h"
-#include "ADT/matriks.h"
-*/
+#include "Fungsi/ADT/arraydin.h"
+#include "Fungsi/ADT/boolean.h"
+#include "Fungsi/ADT/point.h"
+#include "Fungsi/ADT/queue.h"
+#include "Fungsi/ADT/stack.h"
+#include "Fungsi/ADT/graph.h"
+#include "Fungsi/ADT/matriks.h"
+#include "Fungsi/ADT/mesinkar.h"
+#include "Fungsi/ADT/mesinkata.h"
 
 // Variable Global
+#ifndef GLOBALVAR
+#define GLOBALVAR
 int Uang;
 ArrayDinInventory Inventory;
-Point CurrentLocation;
-Point BaseLocation;
-Point ShopLocation;
+int CurrentLocation;
+int NbBangungan;
+int mapX, mapY;
+Point LokasiBangunan[30];
+Matriks Map;
+Graph Jalur;
 Queue Order;
 Stack CurrentBuild;
+#endif
 
+// FUNGSI
+#include "Fungsi/load-save.h"
+#include "Fungsi/move-map.h"
+#include "Fungsi/build-component.h"
+//#include "Fungsi/checkorder-shop-endday.h"
+#include "Fungsi/status-deliver.h"
 
-int main(){
+void load_konfig(){
 
-    // LOAD FILE KONFIGURASI
-    // mesin kata, disimpen ke konfig
-
-    // LOAD FILE KOMPONEN
-    
-    // MINTA COMMAND
-
-       
-       
-}
-
-void load(){
-    
-}
-
-void move(){
-
-}
-
-void status(){
-    printf("Uang tersisa: $%d\n", Uang);
-    printf("Build yang sedang dikerjakan: pesanan %d untuk pelanggan %d.\n", Head(Order), Order.Pemesan->NoPelanggan );
-    printf("Lokasi: pemain sedang berada pada %d\n", CurrentLocation);
-    printf("Inventory anda: %d", Inventory.TabKomponen);
-}
-
-void checkorder(){
-	
-}
-
-void startbuild(){
-	printf("Kamu telah memulai pesanan %d untuk pelanggan %d", Head(Order), Order.Pemesan->NoPelanggan);
-	CreateEmptyStack(&CurrentBuild);
-}
-
-void finishbuild(){
-	/* if { *masi blm tau syaratnya*
-		printf("Pesanan %d telah selesai. Silahkan antar ke pelanggan %d!", Head(Order), Order.Pemesan->NoPelanggan);
-	}
-	else {
-		printf("Komponen yang dipasangkan belum sesuai dengan pesanan, build belum dapat diselesaikan.");
-	} */
-}
-
-void addcomponent(){
-	int Nomor;
-    printf("Komponen yang telah terpasang: \n");
-	if (IsStackEmpty(CurrentBuild)) {
-		printf("Tidak ada komponen yang terpasang. \n");
-	}
-	else {
-		for (int x = 1; x < Top(CurrentBuild) ; x++) {
-			printf("%d. %s \n", x, InfoTop(CurrentBuild));
-		}
-	}
-	
-	printf("Komponen yang tersedia: \n");
-	if (IsEmpty(Inventory)) {
-		printf("Inventory anda kosong.");
-	}
-	else {
-		for (int y = 1; y < (Inventory).Neff; y++) {
-			printf("%d. %s \n", y, Inventory.NamaKomponen[(y)]);
-		}
-		
-		printf("Komponen yang ingin dipasang: ");
-		scanf("%d", Nomor);
-		if (IsIdxEff(Inventory, Nomor)) {
-			Push(&CurrentBuild, Inventory.NamaKomponen[(Nomor)]);
-			printf("Komponen berhasil dipasang!");
-		}
-		else {
-			printf("Tidak ada komponen tersebut dalam inventory anda.");
-		}
-	}
-}
-
-void removecomponent(){
-	char *Komp;
-	if (IsStackEmpty(CurrentBuild)) {
-		printf("Tidak ada komponen yang terpasang.");
-	}
-	else {
-		Komp = InfoTop(CurrentBuild);
-		Pop(&S, &Komp);
-		printf("Komponen %s berhasil dicopot!", Komp);
-		/* for (int i = 1; i < Inventory.Neff; i++) {
-			if (Inventory.NamaKomponen[(i)] == Komp) {
-				
-			}
-			else {
-				
-			}
-		} */
-	}
-}
-
-void shop(){
-    int belikomp,kuantitas,total;
-    //Komponen ListKomp;
-    //char IDKomponen;
-    printf("Komponen yang tersedia:\n");
-    for (int i=0;i<24;i++){
-        printf("%d. %s - ""$""%d\n",(i+1),IDKomponen[i],ListKomp[i]->Harga);
+    STARTKATAFILE();
+    int panjangKata = CKata.Length;
+    mapX = 0;
+    for (int i=0; i < panjangKata; i++) {
+        mapX = 10*mapX + (CKata.TabKata[i+1] - '0');
     }
-    printf("Komponen yang ingin dibeli: ");
-    scanf("%d",(&belikomp));
-    printf("Masukkan jumlah yang ingin dibeli: ");
-    scanf("%d",(&kuantitas));
-    for (int i=0;i<24;i++){
-        if (i==belikomp){
-            total = ((ListKomp[i-1]->Harga)*(kuantitas));
-            if (total>Uang){
-                printf("Uang tidak cukup!");
-            } else{
-                Uang=Uang-total;
-                 //addKomponen(*T,*[i-1],kuantitas);
-                printf("Komponen berhasil dibeli!");
-            }
-        }else{
-            printf("Tidak ada komponen");
-            break;
+    //printf("mapX = %d\n",mapX);
+
+    ADVKATAFILE();
+    panjangKata = CKata.Length;
+    mapY = 0;
+    for (int i=0; i < panjangKata; i++) {
+        mapY = 10*mapY + (CKata.TabKata[i+1] - '0');
+    }
+    //printf("mapY = %d\n",mapY);
+
+    ADVFILE();
+    ADVKATAFILE();
+    panjangKata = CKata.Length;
+    NbBangungan = 0;
+    for (int i=0; i < panjangKata; i++) {
+        NbBangungan = 10*NbBangungan + (CKata.TabKata[i+1] - '0');
+    }
+    //printf("nbbang = %d\n",NbBangungan);
+
+    for (int i=0; i<NbBangungan; i++){
+        ADVFILE(); // skip enter
+        ADVKATAFILE(); // skip huruf
+        ADVKATAFILE();
+        panjangKata = CKata.Length;
+        int lokX = 0;
+        for (int i=0; i < panjangKata; i++) {
+            lokX = 10*lokX + (CKata.TabKata[i+1] - '0');
+        }
+        printf("x = %d ",lokX);
+        ADVKATAFILE();
+        panjangKata = CKata.Length;
+        int lokY = 0;
+        for (int i=0; i < panjangKata; i++) {
+            lokY = 10*lokY + (CKata.TabKata[i+1] - '0');
+        }
+        //printf("y = %d\n",lokY);
+        LokasiBangunan[i] = MakePOINT(lokX,lokY);
+    }
+
+    BuatMatriks(NbBangungan,NbBangungan,&Map);
+
+    for (int i = 0; i < NbBangungan; i++){
+        ADVFILE();
+        for (int j = 0; j < NbBangungan; j++){
+            ADVKATAFILE();
+            int lok = (int) (CKata.TabKata[1]-'0');
+            Elmt(Map, i, j) = lok;
         }
     }
+
+    //PrintMatriks(Map);
+
+    EOP = true;
+    ADVFILE();
 }
 
-void deliver(){
-    Point P = Order.Pemesan[Head(Order)].Lokasi;
-    if(CurrentLocation == P){
-        Head(Order) = Head(Order)+1;
-        Uang = Uang + Order.Pemesan->Invoice;
+void enter_command(){
+
+    printf("\n");
+    printf("ENTER COMMAND: ");
+
+    char listPilihanCommand[13][20] = {
+        "MOVE", //0
+        "STATUS",
+        "CHECKORDER",
+        "SHOP",
+        "STARTBUILD",
+        "ADDCOMPONENT", //5
+        "REMOVECOMPONENT",
+        "FINISHBUILD",
+        "MAP",
+        "DELIVER", //9
+        "ENDDAY",
+        "SAVE",
+        "EXIT"
+    };
+
+    STARTKATA();
+    char kataCommand[20];
+    int panjangKata = CKata.Length;
+    //printf("%d",panjangKata);
+
+    for (int i = 0; i < panjangKata; i++){
+        kataCommand[i] = CKata.TabKata[i+1];
     }
+
+    if (isKataSama(kataCommand, listPilihanCommand[0], panjangKata)){
+        move();
+        enter_command();
+    }
+    else if (isKataSama(kataCommand, listPilihanCommand[1], panjangKata)){
+        status();
+        enter_command();
+    }
+    else if (isKataSama(kataCommand, listPilihanCommand[2], panjangKata)){
+        //FUNGSI CHECKORDER
+        enter_command();
+    }
+    else if (isKataSama(kataCommand, listPilihanCommand[3], panjangKata)){
+        //FUNGSI SHOP
+        enter_command();
+    }
+    else if (isKataSama(kataCommand, listPilihanCommand[4], panjangKata)){
+        //FUNGSI STARTBUILD
+        enter_command();
+    }
+    else if (isKataSama(kataCommand, listPilihanCommand[5], panjangKata)){
+        //FUNGSI ADDCOMPONENT
+        enter_command();
+    }
+    else if (isKataSama(kataCommand, listPilihanCommand[6], panjangKata)){
+        //FUNGSI REMOVECOMPONENT
+        enter_command();
+    }
+    else if (isKataSama(kataCommand, listPilihanCommand[7], panjangKata)){
+        //FUNGSI FINISHBUILD
+        enter_command();
+    }
+    else if (isKataSama(kataCommand, listPilihanCommand[8], panjangKata)){
+        map();
+        enter_command();
+    }
+    else if (isKataSama(kataCommand, listPilihanCommand[9], panjangKata)){
+        deliver();
+        enter_command();
+    }
+    else if (isKataSama(kataCommand, listPilihanCommand[10], panjangKata)){
+        //FUNGSI ENDDAY
+        enter_command();
+    }
+    else if (isKataSama(kataCommand, listPilihanCommand[11], panjangKata)){
+        //FUNGSI SAVE
+        enter_command();
+    }
+    else if (isKataSama(kataCommand, listPilihanCommand[12], panjangKata)){
+        printf("BYEEE\n");
+    }
+    else {
+        printf("Command tidak ditemukan, silahkan coba lagi!\n");
+        enter_command();
+    }
+
 }
 
-void end_day(){
-    
+void main_menu(){
+
+    printf("Selamat datang di Game Santo Tycoon\n");
+    printf("Pilihan:\n");
+    printf("1. NEW GAME\n");
+    printf("2. LOAD GAME\n");
+    printf("NOMOR PILIHAN: ");
+
+    int pil; scanf("%d",&pil);
+
+    if(pil==1){
+        Uang = 1000;
+        //printf("masuk pil 1\n");
+        CreateEmptyGraph(&Jalur);
+        adrNode nodeBangunan = AlokasiNode(0);
+        Jalur.First = nodeBangunan;
+        for (int i = 1; i < NbBangungan; i++){
+            //printf("%d\n",i);
+            nodeBangunan->Next = AlokasiNode(i);
+            nodeBangunan = nodeBangunan->Next;
+        }
+        CurrentLocation = 0;
+        //printf("sebelum mtg\n");
+        MatrixToGraph(Map,&Jalur);
+        //printf("selesai matriks to graph\n");
+        // init
+        enter_command();
+    }
+
 }
 
-void save(){
-    
-}
+int main() {
 
-void map(){
+    load_konfig();
+    main_menu();
 
-}
-
-void exit (){
-    
 }

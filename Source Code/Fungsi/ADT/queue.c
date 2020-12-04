@@ -45,7 +45,7 @@ void CreateEmptyQueue(Queue *Q, int Max) {
 	}
 }
 
-void DeAlokasi(Queue *Q) {
+void DealokasiQ(Queue *Q) {
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
